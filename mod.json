@@ -1,0 +1,7 @@
+{
+    "BaseDir": "",
+    "EntryPoint": "HelloMod.Main",
+    "IsDevelopment": true,
+    "Name": "Hello Mod",
+    "Project": "HelloMod.csproj"
+}
