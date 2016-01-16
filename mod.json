@@ -1,7 +1,1 @@
-{
-    "BaseDir": "",
-    "EntryPoint": "HelloMod.Main",
-    "IsDevelopment": true,
-    "Name": "Hello Mod",
-    "Project": "HelloMod.csproj"
-}
+{"BaseDir":"","CompilerVersion":"v3.5","CodeFiles":[],"IsDevelopment":true,"IsEnabled":true,"Name":"Top Hats","Project":"TopHats.csproj","Tag":null,"ReferencedAssemblies":[],"Repository":null}

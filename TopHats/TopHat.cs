@@ -12,7 +12,7 @@ namespace HelloMod.Mod
         public TopHat()
         {
             this.bodyLocation = BodyLocation.HEAD;
-            
+
         }
 
         public override string getName()
@@ -20,11 +20,7 @@ namespace HelloMod.Mod
             return "TEST";
         }
 
-        void FixedUpdate()
-        {
-            //UnityEngine.Debug.Log("tick");
-           // gObject.transform.position = this.handle.position;
-        }
+
        
     }
 }

@@ -10,13 +10,16 @@ namespace HelloMod
         public void onEnabled()
         {
             _go = new GameObject();
-            _go.AddComponent<HelloBehaviour>();
+			var component = _go.AddComponent<CustomShopLoader>();
+			component.LoadShop ();
         }
 
         public void onDisabled()
         {
             UnityEngine.Object.Destroy(_go);
         }
+
+	
 
         public string Name
         {
