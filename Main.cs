@@ -11,7 +11,8 @@ namespace HelloMod
         {
             _go = new GameObject();
 			var component = _go.AddComponent<CustomShopLoader>();
-			component.LoadShop ();
+
+			component.LoadShop();
         }
 
         public void onDisabled()

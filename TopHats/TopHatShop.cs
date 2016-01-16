@@ -10,7 +10,20 @@ namespace HelloMod.Mod
 		{
 			
 		}
-			
+
+		
+		protected override void Awake ()
+		{
+			base.Awake ();
+	
+		}
+
+		public override void Initialize ()
+		{
+			this.gameObject.SetActive (true);
+			base.Initialize ();
+		}
+
 
 	}
 }
