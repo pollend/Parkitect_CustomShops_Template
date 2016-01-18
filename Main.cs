@@ -1,4 +1,8 @@
 ﻿using UnityEngine;
+using System.IO;
+using System;
+
+
 namespace HelloMod
 {
     public class Main : IMod
@@ -11,8 +15,8 @@ namespace HelloMod
         {
             _go = new GameObject();
 			var component = _go.AddComponent<CustomShopLoader>();
-
-			component.LoadShop();
+			component.Main = this;
+			component.Load();
         }
 
         public void onDisabled()
@@ -21,15 +25,40 @@ namespace HelloMod
         }
 
 	
+		public void LogException(Exception e)
+		{
+			StreamWriter sw = File.AppendText(this.Path + @"/mod.log");
+
+			sw.WriteLine(e);
+
+			sw.Flush();
+
+			sw.Close();
+		}
+
+		public void Log(string value)
+		{
+			StreamWriter sw = File.AppendText(this.Path + @"/mod.log");
+
+			sw.WriteLine(value);
+
+			sw.Flush();
+
+			sw.Close();
+		}
+
+
 
         public string Name
         {
-            get { return "Hello Mod"; }
+            get { return "Top Hat Shop"; }
         }
 
         public string Description
         {
-            get { return "Validates if mods are working on your PC"; }
+            get { return "Creates a shop that sells top hats to the guest"; }
         }
+		public string Path { get; set; }
+
     }
 }

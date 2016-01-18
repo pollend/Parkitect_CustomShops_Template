@@ -10,6 +10,7 @@ public class AssetBundler : MonoBehaviour
 		[MenuItem("Assets/Build AssetBundles")]
 		static void BuildAllAssetBundles()
 		{
+			
 			BuildPipeline.BuildAssetBundles("./../assetbundle/");
 		}
 	}

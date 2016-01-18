@@ -1,3 +1,6 @@
 ManifestFileVersion: 0
 AssetBundleManifest:
-  AssetBundleInfos: {}
+  AssetBundleInfos:
+    Info_0:
+      Name: TopHats
+      Dependencies: {}

@@ -60,7 +60,6 @@
     <Compile Include="TopHats\TopHat.cs" />
     <Compile Include="TopHats\TopHatShop.cs" />
     <Compile Include="CustomShopLoader.cs" />
-    <Compile Include="TopHats\SampleResource.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
