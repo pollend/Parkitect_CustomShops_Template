@@ -9,52 +9,33 @@ namespace HelloMod
     public class CustomShopLoader : MonoBehaviour
     {
 		public Main Main;
-		private List<GameObject> _registeredObjects = new List<GameObject>();
+		private List< UnityEngine.Object> _registeredObjects = new List<UnityEngine.Object>();
 
 		public CustomShopLoader()
         {
-
         }
 
 		public void Load()
 		{
-			var topHat = TopHat.LoadTopHat (this);
-			_registeredObjects.Add (topHat.gameObject);
-			_registeredObjects.Add(TopHatShop.LoadTopHatShop (this, topHat).gameObject);
+			GameObject topHatObject = LoadAsset<GameObject>("TopHatPrefab");
+			var topHat = topHatObject.AddComponent<TopHat>();
+			topHat.configure ();
+			AssetManager.Instance.registerObject (topHat);
 
-			/*TopHatShop.LoadTopHatShop (this);
-				GameObject p = GameObject.CreatePrimitive (PrimitiveType.Cube);
-				var hat = p.AddComponent<TopHat> ();
-
-				var Resources = ScriptableObject.CreateInstance<Resource> ();
-				Resources.costs = 1.0f;
-				Resources.getResourceSettings ().percentage = .45f;
-				Resources.name = "derp";
+			GameObject topHatShopObject = LoadAsset<GameObject> ("ShopPrefab");
+			var topHatShop = topHatShopObject.AddComponent<TopHatShop> ();
+			topHatShop.Configure (new GameObject[]{ topHatObject });
+			AssetManager.Instance.registerObject (topHatShop);
 
 
-				Ingredient one = new Ingredient (){ resource = Resources };
-				one.defaultAmount = 20.0f;
-				hat.ingredients = new Ingredient[]{ one };
-
-				AssetManager.Instance.registerObject (hat);
-
-				GameObject o = GameObject.CreatePrimitive (PrimitiveType.Cube);
-				o.SetActive(false);
-	
-
-				var shop = o.AddComponent<TopHatShop> ();
-				shop.price = 10;
-				shop.setDisplayName ("Top Hats");
-
-				shop.productGOs = new GameObject[]{ p };
-				hat.boughtFrom = shop;
-				hat.defaultPrice = 12.0f;
-
-				AssetManager.Instance.registerObject (shop);*/
 		}
 
 		public void Unload()
 		{
+			foreach (UnityEngine.Object gameObjects in _registeredObjects)
+			{
+				AssetManager.Instance.unregisterObject(gameObjects);
+			}
 		}
 
 		public T  LoadAsset<T>(string prefabName) where T : UnityEngine.Object
@@ -85,15 +66,8 @@ namespace HelloMod
 
 					try
 					{
-						Main.Log("------------------------------------------");
-						Main.Log(bundle.GetAllAssetNames().Length.ToString());
-						foreach(var v in bundle.GetAllAssetNames())
-						{
-							Main.Log(v);
-						}
-						Main.Log("------------------------------------------");
 						asset = bundle.LoadAsset<T>(prefabName);
-			
+						_registeredObjects.Add(asset);
 						bundle.Unload(false);
 
 						return asset;

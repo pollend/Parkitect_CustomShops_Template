@@ -21,6 +21,7 @@ namespace HelloMod
 
         public void onDisabled()
         {
+			_go.GetComponent<CustomShopLoader> ().Unload ();
             UnityEngine.Object.Destroy(_go);
         }
 

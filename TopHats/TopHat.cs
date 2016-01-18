@@ -6,31 +6,25 @@ using UnityEngine;
 
 namespace HelloMod.Mod
 {
-    public class TopHat : WearableProduct
+	public class TopHat : WearableProduct
     {
-		public static TopHat LoadTopHat(CustomShopLoader shopLoader)
+
+		public void configure()
 		{
-			GameObject topHatObject = shopLoader.LoadAsset<GameObject>("TopHatPrefab");
-			topHatObject.SetActive (false);
+			var resources = ScriptableObject.CreateInstance< Resource> ();
+			resources.costs = 0.2f;
+			resources.getResourceSettings ().percentage = 1f;
 
-			var topHat = topHatObject.AddComponent<TopHat>();
-
-			var resources = ScriptableObject.CreateInstance<Resource> ();
-			resources.costs = 0.5f;
-			resources.getResourceSettings ().percentage = .45f;
-			resources.name = "top hat";
 
 			Ingredient topHatIngridents = new Ingredient ();
 			topHatIngridents.defaultAmount = 1.0f;
 			topHatIngridents.resource = resources;
 
-			topHat.ingredients = new Ingredient[]{topHatIngridents };
 
-			topHat.defaultPrice = 10.0f;
+			ingredients = new Ingredient[]{topHatIngridents };
 
-			AssetManager.Instance.registerObject (topHat);
-
-			return topHat;
+			//default price for a hat
+			defaultPrice = 1.0f;
 		}
  
         public TopHat()

@@ -6,42 +6,35 @@ namespace HelloMod.Mod
 	public class TopHatShop : ProductShop
 	{
 
-		public static TopHatShop LoadTopHatShop(CustomShopLoader shopLoader,TopHat tophat)
+		public void Configure(GameObject[] gameObjects)
 		{
-			GameObject topHatShopObject = shopLoader.LoadAsset<GameObject>("ShopPrefab");
-			topHatShopObject.SetActive (false);
-
-			//------------------------SHOP------------------------------
-			var topHatShop = topHatShopObject.AddComponent<TopHatShop>();
-
-			topHatShop.name = "Top Hat Shop";
-			topHatShop.price = 20.0f;
-
-			topHatShop.productGOs = new GameObject[]{ tophat.gameObject };
-
-			AssetManager.Instance.registerObject (topHatShop);
-
-			return topHatShop;
+			this.productGOs = gameObjects;
+			this.dontSerialize = false;
 		}
 
-
-		public TopHatShop()
+		public TopHatShop() 
 		{
-			
+
 		}
 
+		public override string getName ()
+		{
+			return "Top Hat Shop";
+		}
 		
 		protected override void Awake ()
 		{
 			base.Awake ();
-	
 		}
 
 		public override void Initialize ()
 		{
 			this.gameObject.SetActive (true);
+
 			base.Initialize ();
 		}
+
+
 
 
 	}
