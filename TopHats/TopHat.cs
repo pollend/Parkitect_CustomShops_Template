@@ -16,7 +16,7 @@ namespace HelloMod.Mod
 			var topHat = topHatObject.AddComponent<TopHat>();
 
 			var resources = ScriptableObject.CreateInstance<Resource> ();
-			resources.costs = 5.0f;
+			resources.costs = 0.5f;
 			resources.getResourceSettings ().percentage = .45f;
 			resources.name = "top hat";
 
