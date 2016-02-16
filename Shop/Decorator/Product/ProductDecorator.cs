@@ -22,6 +22,9 @@ namespace CustomShops
 			case "consumable":
 				new ConsumableProductDecorator (_name).Decorate (go, options, assetBundle);
 				break;
+            case "ongoing":
+                new OnGoingProductDecorator(_name).Decorate(go,options,assetBundle);
+                break;
 			default:
 				UnityEngine.Debug.Log ("illegal type");
 				break;

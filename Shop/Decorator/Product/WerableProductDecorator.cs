@@ -24,6 +24,18 @@ namespace CustomShops
 			product.defaultPrice = (float)(double)options ["price"];
 
 
+            if (options.ContainsKey ("hand")) {
+                switch((string)options["hand"])
+                {
+                case "left":
+                    product.handSide = Hand.Side.LEFT;
+                    break;
+                case "right":
+                    product.handSide = Hand.Side.RIGHT;
+                    break;
+                }
+            }
+
 			switch ((string)options ["bodylocation"]) {
 			case "head":
 				product.bodyLocation = WearableProduct.BodyLocation.HEAD;

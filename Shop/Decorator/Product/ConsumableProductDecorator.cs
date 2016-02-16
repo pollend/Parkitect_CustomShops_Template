@@ -22,6 +22,18 @@ namespace CustomShops
 
 			consumable.defaultPrice = (float)(double)options ["price"];
 
+            if (options.ContainsKey ("hand")) {
+                switch((string)options["hand"])
+                {
+                case "left":
+                    consumable.handSide = Hand.Side.LEFT;
+                    break;
+                case "right":
+                    consumable.handSide = Hand.Side.RIGHT;
+                    break;
+                }
+            }
+
 
 			if (options.ContainsKey ("consumeanimation")) {
 				switch ((string)options ["consumeanimation"]) {
