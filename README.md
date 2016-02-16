@@ -33,6 +33,7 @@
 				"price": 20.5,
 				"type" : "consumable",
 				"temprature" : "hot",
+				"hand" : "left",
 				"consumeanimation" : "generic", 
 				"portions" : 10,
 				"effects": [
