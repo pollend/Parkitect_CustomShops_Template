@@ -1,93 +1,89 @@
-﻿using HelloMod.Mod;
-using UnityEngine;
+﻿using UnityEngine;
 using System;
 using System.IO;
 using System.Collections.Generic;
+using MiniJSON;
 
-namespace HelloMod
+namespace CustomShops
 {
-    public class CustomShopLoader : MonoBehaviour
+	public class CustomShopLoader : MonoBehaviour
     {
 		public Main Main;
-		private List< UnityEngine.Object> _registeredObjects = new List<UnityEngine.Object>();
+		private List<Product> _products = new List<Product>();
+		private List<BuildableObject> _buildableObjects = new List<BuildableObject>();
+		public string Path;
 
-		public CustomShopLoader()
-        {
-        }
-
-		public void Load()
+		public void LoadShop()
 		{
-			GameObject topHatObject = LoadAsset<GameObject>("TopHatPrefab");
-			var topHat = topHatObject.AddComponent<TopHat>();
-			topHat.configure ();
-			AssetManager.Instance.registerObject (topHat);
 
-			GameObject topHatShopObject = LoadAsset<GameObject> ("ShopPrefab");
-			var topHatShop = topHatShopObject.AddComponent<TopHatShop> ();
-			topHatShop.Configure (new GameObject[]{ topHatObject });
-			AssetManager.Instance.registerObject (topHatShop);
-
-
-		}
-
-		public void Unload()
-		{
-			foreach (UnityEngine.Object gameObjects in _registeredObjects)
-			{
-				AssetManager.Instance.unregisterObject(gameObjects);
-			}
-		}
-
-		public T  LoadAsset<T>(string prefabName) where T : UnityEngine.Object
-		{
 			try
 			{
-				T asset;
-
 				char dsc = System.IO.Path.DirectorySeparatorChar;
-				using (WWW www = new WWW("file://" + Main.Path + dsc + "assetbundle" + dsc + "TopHats"))
+				var dict = Json.Deserialize(File.ReadAllText(Path + @"/shop.json")) as Dictionary<string,object>;
+
+				UnityEngine.Debug.Log("invalid json:" + (dict == null));
+
+				using (WWW www = new WWW("file://" + Path + dsc + "assetbundle" + dsc + "shop"))
 				{
-		
-					if (www.error != null)
-					{
-						Main.Log("Loading had an error:" + www.error);
-						Debug.Log("Loading had an error:" + www.error);
-						throw new Exception("Loading had an error:" + www.error);
-					}
+					if(www.error != null)
+						throw new Exception("Failed to Load:" + www.error);
+
 					if(www.assetBundle == null)
 					{
-						Main.Log("assetBundle is null");
-						Debug.Log("Loading had an error:" + www.error);
-						throw new Exception("assetBundle is null");
-
+						throw new Exception("AssetBundle is null");
 					}
+
 					AssetBundle bundle = www.assetBundle;
 
-
-					try
+					foreach(KeyValuePair<string,object> pair in dict)
 					{
-						asset = bundle.LoadAsset<T>(prefabName);
-						_registeredObjects.Add(asset);
-						bundle.Unload(false);
 
-						return asset;
-					}
-					catch (Exception e)
-					{
-						Debug.Log(e);
+						var option = pair.Value as Dictionary<string,object>;
 
-						Main.LogException(e);
-						bundle.Unload(false);
-						return null;
+						GameObject asset = UnityEngine.Object.Instantiate(bundle.LoadAsset((string)option["model"])) as GameObject;
+						asset.SetActive(false);
+						new ShopSettingsDecorator().Decorate(asset,option,bundle);
+
+
+						new PriceDecorator((double)option["price"]).Decorate(asset,option,bundle);
+						new NameDecorator(pair.Key).Decorate(asset,option,bundle);
+
+						asset.GetComponent<BuildableObject>().dontSerialize = true;
+						asset.GetComponent<BuildableObject>().isPreview = true;
+						_buildableObjects.Add(asset.GetComponent<BuildableObject>());
+
+						foreach(GameObject productsObject in asset.GetComponent<ProductShop>().productGOs)
+						{
+							_products.Add(productsObject.GetComponent<Product>());
+						}
+
+
+						AssetManager.Instance.registerObject(asset.GetComponent<BuildableObject>());
+
 					}
+					bundle.Unload(false);
+
 				}
+				
 			}
-			catch (Exception e)
-			{
-				Main.LogException(e);
-				return null;
+			catch(Exception e) {
+				UnityEngine.Debug.LogException (e);
 			}
 		}
+
+		public void UnloadShops()
+		{
+			foreach (BuildableObject shops in _buildableObjects)
+			{
+				AssetManager.Instance.unregisterObject(shops);
+			}
+			foreach (Product product in _products)
+			{
+				AssetManager.Instance.unregisterObject(product);
+			}
+		}
+
+
 
     }
 }

@@ -3,63 +3,31 @@ using System.IO;
 using System;
 
 
-namespace HelloMod
+namespace CustomShops
 {
     public class Main : IMod
     {
         private GameObject _go;
         
-        public string Identifier { get; set; }
-        
         public void onEnabled()
         {
-            _go = new GameObject();
+           _go = new GameObject();
 			var component = _go.AddComponent<CustomShopLoader>();
-			component.Main = this;
-			component.Load();
+			component.Path = Path;
+			component.LoadShop ();
         }
 
         public void onDisabled()
         {
-			_go.GetComponent<CustomShopLoader> ().Unload ();
+			_go.GetComponent<CustomShopLoader> ().UnloadShops ();
             UnityEngine.Object.Destroy(_go);
         }
 
-	
-		public void LogException(Exception e)
-		{
-			StreamWriter sw = File.AppendText(this.Path + @"/mod.log");
-
-			sw.WriteLine(e);
-
-			sw.Flush();
-
-			sw.Close();
-		}
-
-		public void Log(string value)
-		{
-			StreamWriter sw = File.AppendText(this.Path + @"/mod.log");
-
-			sw.WriteLine(value);
-
-			sw.Flush();
-
-			sw.Close();
-		}
 
 
-
-        public string Name
-        {
-            get { return "Top Hat Shop"; }
-        }
-
-        public string Description
-        {
-            get { return "Creates a shop that sells top hats to the guest"; }
-        }
+		public string Name { get { return "Custom Shop Pack"; } }
+		public string Description { get { return "Custom Shop Pack"; } }
 		public string Path { get; set; }
-
+		public string Identifier { get; set; }
     }
 }
