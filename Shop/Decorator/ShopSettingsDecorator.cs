@@ -23,7 +23,6 @@ namespace CustomShops
 			shop.productGOs = products.ToArray ();
 
 
-
 		}
 	}
 }

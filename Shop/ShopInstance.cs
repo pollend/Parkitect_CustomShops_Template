@@ -15,7 +15,14 @@ namespace CustomShops
 
 			base.Initialize ();
 		}
+		public override ShopSettings getSettings ()
+		{
+			//hack to get products to be configured
+			if(this.products == null)
+			Awake ();
 
+			return base.getSettings ();
+		}
 	}
 }
 

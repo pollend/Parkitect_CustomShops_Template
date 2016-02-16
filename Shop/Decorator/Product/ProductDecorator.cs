@@ -33,7 +33,8 @@ namespace CustomShops
 
 				var resource = ScriptableObject.CreateInstance< Resource> ();
 				resource.name = collection.Key;
-			
+
+				AssetManager.Instance.registerObject (resource);
 
 				resource.setDisplayName (collection.Key);
 				resource.costs = (float)(double)dictIngredient ["price"];
@@ -75,10 +76,9 @@ namespace CustomShops
 
 				ingredients.Add (ingredient);
 
-				go.gameObject.GetComponent<Product> ().ingredients = ingredients.ToArray ();
-
-
 			}
+			go.gameObject.GetComponent<Product> ().ingredients = ingredients.ToArray ();
+
 
 
 

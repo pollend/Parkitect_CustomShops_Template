@@ -18,7 +18,7 @@
 					},
 					"ingredient1" :{
 					 "price": 1.0,
-					 "amount" : 10.0,
+					 "amount" : 1.0,
 					 "tweakable" : true
 					}
 				}
@@ -39,7 +39,7 @@
 				"ingridents": {
 					"ingredient1" :{
 					 "price": 1.0,
-					 "amount" : 10.0,
+					 "amount" : 1.0,
 					"tweakable" : false
 					}
 				}
