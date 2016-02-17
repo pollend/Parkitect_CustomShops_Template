@@ -15,7 +15,7 @@
 				"bodylocation" : "head",
 				"hideonrides" : false,
 				"hidehair" : true,
-				"ingridents": {
+				"ingredients": {
 					"ingredient2" :{
 					 "price": 1.0,
 					 "amount" : 10.0,
@@ -42,7 +42,7 @@
 						"amount" : 0.4
 					}
 				],
-				"ingridents": {
+				"ingredients": {
 					"ingredient1" :{
 					 "price": 1.0,
 					 "amount" : 1.0,

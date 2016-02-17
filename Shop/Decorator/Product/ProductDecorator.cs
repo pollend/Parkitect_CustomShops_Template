@@ -31,7 +31,7 @@ namespace CustomShops
 			}
 
 			List<Ingredient> ingredients = new List<Ingredient> ();
-			foreach (KeyValuePair<string,object> collection in options["ingridents"] as Dictionary<string,object>) {
+			foreach (KeyValuePair<string,object> collection in options["ingredients"] as Dictionary<string,object>) {
 				var dictIngredient = collection.Value as Dictionary<string,object>;
 
 				var resource = ScriptableObject.CreateInstance< Resource> ();
