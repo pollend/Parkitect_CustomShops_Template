@@ -39,7 +39,7 @@
 				"effects": [
 					{
 						"affectStat" : "hunger",
-						"amount" : 0.4
+						"amount" : -0.4
 					}
 				],
 				"ingredients": {
@@ -74,13 +74,13 @@ prodcuts are what your shop is selling. there are three types of products in the
 "effects": [
 {
 	"affectStat" : "hunger",
-	"amount" : 0.4
+	"amount" : -0.4
 }
 ]
 ```
 
 effects are stat based effects for any given npc. they are divided into ``` hunger/thirst/happiness/tiredness/sugarboost ```.
-wearable product I believe are not effects by these stats. ongoing products will be effect the npc by the tick while consumable products are only active when an npc consumes the product. amount is bounded between 0 and 1. 
+wearable product I believe are not effects by these stats. ongoing products will be effect the npc by the tick while consumable products are only active when an npc consumes the product. amount is bounded between 0 and -1. 
 
 
 
