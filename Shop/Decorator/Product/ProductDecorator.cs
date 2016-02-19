@@ -33,20 +33,16 @@ namespace CustomShops
 			List<Ingredient> ingredients = new List<Ingredient> ();
 			foreach (KeyValuePair<string,object> collection in options["ingredients"] as Dictionary<string,object>) {
 				var dictIngredient = collection.Value as Dictionary<string,object>;
-
 				var resource = ScriptableObject.CreateInstance< Resource> ();
 				resource.name = collection.Key;
-
-				AssetManager.Instance.registerObject (resource);
-
 				resource.setDisplayName (collection.Key);
 				resource.costs = (float)(double)dictIngredient ["price"];
 				resource.getResourceSettings ().percentage = 1f;
-
-
-				List<ConsumableEffect> consumableEffects = new List<ConsumableEffect> ();
 				if (dictIngredient.ContainsKey ("effects")) {
-					foreach (Dictionary<string,object> effect in options["effects"] as List<Dictionary<string,object>>) {
+					List<ConsumableEffect> consumableEffects = new List<ConsumableEffect> ();
+
+					foreach (object temp in dictIngredient["effects"] as List<object>) {
+						Dictionary<string,object> effect = (Dictionary<string,object>)temp; 
 						var consumableEffect = new ConsumableEffect ();
 						switch ((string)effect ["affectStat"]) {
 						case "hunger":
@@ -68,24 +64,20 @@ namespace CustomShops
 						consumableEffect.amount = (float)(double)effect ["amount"];
 						consumableEffects.Add (consumableEffect);
 					}
+					resource.effects = consumableEffects.ToArray ();
 				}
-
-				resource.effects = consumableEffects.ToArray ();
-
 				Ingredient ingredient = new Ingredient ();
 				ingredient.defaultAmount = (float)(double)dictIngredient ["amount"];
 				ingredient.tweakable = (bool)dictIngredient ["tweakable"];
+				AssetManager.Instance.registerObject (resource);
 				ingredient.resource = resource;
-
 				ingredients.Add (ingredient);
 
 			}
 			go.gameObject.GetComponent<Product> ().ingredients = ingredients.ToArray ();
 
-
-
-
 		}
+
 
 		public GameObject Decorate(Dictionary<string, object> options, AssetBundle assetBundle)
 		{

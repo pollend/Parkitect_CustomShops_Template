@@ -15,7 +15,7 @@ namespace CustomShops
 
 		public void Decorate(GameObject go, Dictionary<string, object> options, AssetBundle assetBundle)
 		{
-			var consumable = go.AddComponent<ConsumableProduct> ();
+			var consumable = go.AddComponent<ConsumableProductInstance> ();
 
 			BindingFlags flags = BindingFlags.GetField | BindingFlags.Instance | BindingFlags.NonPublic;
 			typeof(Product).GetField ("displayName", flags).SetValue (consumable, _name);
