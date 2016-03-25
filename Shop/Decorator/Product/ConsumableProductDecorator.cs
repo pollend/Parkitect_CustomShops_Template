@@ -55,8 +55,8 @@ namespace CustomShops
 				consumable.consumeAnimation = ConsumableProduct.ConsumeAnimation.GENERIC;
 			}
 
-			if (options.ContainsKey ("temprature")) {
-				switch ((string)options ["temprature"]) {
+			if (options.ContainsKey ("temperature")) {
+				switch ((string)options ["temperature"]) {
 				case "none":
 					consumable.temperaturePreference = ConsumableProduct.TemperaturePreference.NONE;
 					break;

@@ -42,9 +42,9 @@ namespace CustomShops
 					List<ConsumableEffect> consumableEffects = new List<ConsumableEffect> ();
 
 					foreach (object temp in dictIngredient["effects"] as List<object>) {
-						Dictionary<string,object> effect = (Dictionary<string,object>)temp; 
+						Dictionary<string,object> affects = (Dictionary<string,object>)temp; 
 						var consumableEffect = new ConsumableEffect ();
-						switch ((string)effect ["affectStat"]) {
+						switch ((string)affects ["affectStat"]) {
 						case "hunger":
 							consumableEffect.affectedStat = ConsumableEffect.AffectedStat.HUNGER;
 							break;
@@ -57,11 +57,14 @@ namespace CustomShops
 						case "tiredness":
 							consumableEffect.affectedStat = ConsumableEffect.AffectedStat.TIREDNESS;
 							break;
-						case "sugerboost":
+						case "sugarboost":
 							consumableEffect.affectedStat = ConsumableEffect.AffectedStat.SUGARBOOST;
 							break;
+						default:
+							UnityEngine.Debug.LogWarning("Unknown affect:" + affects["affectStat"]);
+						break;
 						}
-						consumableEffect.amount = (float)(double)effect ["amount"];
+						consumableEffect.amount = (float)(double)affects ["amount"];
 						consumableEffects.Add (consumableEffect);
 					}
 					resource.effects = consumableEffects.ToArray ();
