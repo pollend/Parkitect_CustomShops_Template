@@ -7,7 +7,8 @@ namespace CustomShops
 	{
 		public ShopInstance()
 		{
-
+			//use 'FORWARD' for a normal shop (e.g. Burgers) use 'DIRECTIONAL' for directional use (e.g. Info Kiosk)
+			walkableFlag = WalkableFlagType.FORWARD;
 		}
 		public override void Initialize ()
 		{
