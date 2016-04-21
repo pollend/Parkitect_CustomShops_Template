@@ -6,17 +6,17 @@ using CustomShops;
 
 namespace CustomShops
 {
-	public class WerableProductDecorator : IDecorator
+	public class WearableProductDecorator : IDecorator
 	{
 		private string _name;
-		public WerableProductDecorator (string name)
+		public WearableProductDecorator (string name)
 		{
 			this._name = name;
 		}
 
 		public void Decorate(GameObject go, Dictionary<string, object> options, AssetBundle assetBundle)
 		{
-			var product = go.AddComponent<WerableProductInstance> ();
+			var product = go.AddComponent<WearableProductInstance> ();
 
 			BindingFlags flags = BindingFlags.GetField | BindingFlags.Instance | BindingFlags.NonPublic;
 			typeof(Product).GetField ("displayName", flags).SetValue (product, _name);
