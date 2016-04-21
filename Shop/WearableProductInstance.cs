@@ -2,10 +2,10 @@
 
 namespace CustomShops
 {
-	public class WerableProductInstance : WearableProduct
+	public class WearableProductInstance : WearableProduct
 	{
 		
-		public WerableProductInstance ()
+		public WearableProductInstance ()
 		{
 			
 		}
