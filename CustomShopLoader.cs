@@ -57,6 +57,7 @@ namespace CustomShops
 							_products.Add(productsObject.GetComponent<Product>());
 						}
 
+						(new ColorDecorator()).Decorate(asset, option, bundle);
 
 						AssetManager.Instance.registerObject(asset.GetComponent<BuildableObject>());
 
