@@ -28,7 +28,7 @@
                 "trash" : {
                     "model" : "model3",
                     "disgustfactor" : 1.0,
-                    "volume" : .4
+                    "volume" : 0.4
                 },
 				"price": 1.5,
 				"type" : "consumable",

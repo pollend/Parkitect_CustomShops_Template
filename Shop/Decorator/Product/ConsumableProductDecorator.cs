@@ -115,19 +115,22 @@ namespace CustomShops
                     consumable.trash = AssetManager.Instance.getPrefab (Prefabs.HotDrinkTrash).gameObject;
                     break;
                 default:
+                    
                     var asset = UnityEngine.Object.Instantiate (assetBundle.LoadAsset ((string)trashItem ["model"])) as GameObject;
+                    UnityEngine.Debug.Log (asset);
                     asset.gameObject.SetActive (false);
-                    Trash t = asset.AddComponent<TrashInstance> ();
+                    Trash trash = asset.AddComponent<TrashInstance> ();
+                    trash.setId (consumable.name + "_trash");
                     if (trashItem.ContainsKey("disgustfactor")) {
-                        t.disgustFactor = (float)(double)trashItem ["disgustfactor"];
+                        trash.disgustFactor = (float)(double)trashItem ["disgustfactor"];
                     }
                     if (trashItem.ContainsKey("canwiggle")) {
-                        t.canWiggle = (bool)trashItem ["canwiggle"];
+                        trash.canWiggle = (bool)trashItem ["canwiggle"];
                     }
                     if (trashItem.ContainsKey("volume")) {
-                        t.volume = (float)(double)trashItem ["volume"];
+                        trash.volume = (float)(double)trashItem ["volume"];
                     }
-                    AssetManager.Instance.registerObject (t);
+                    AssetManager.Instance.registerObject (asset);
                     consumable.trash = asset;
 
                     break;
