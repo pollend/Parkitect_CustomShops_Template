@@ -25,12 +25,17 @@
             },
 			"B": {
 				"model":"model3",
+                "trash" : {
+                    "model" : "model3",
+                    "disgustfactor" : 1.0,
+                    "volume" : .4
+                },
 				"price": 1.5,
 				"type" : "consumable",
 				"temprature" : "hot",
-                "hand" : "left",
+                "hand" : "right",
 				"consumeanimation" : "generic", 
-				"portions" : 10,
+				"portions" : 2,
 				"ingredients": {
 					"ingredient1" :{
 					 "price": 1.0,

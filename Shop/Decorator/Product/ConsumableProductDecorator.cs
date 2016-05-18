@@ -74,8 +74,10 @@ namespace CustomShops
 			consumable.portions = (int)(Int64)options ["portions"];
 
 
-            if (options.ContainsKey ("modeltrash")) {
-                switch ((string)options ["modeltrash"]) {
+            if (options.ContainsKey ("trash")) {
+                Dictionary<string,object> trashItem = options ["trash"] as Dictionary<string,object>;
+
+                switch ((string)trashItem["model"]) {
                 case "PopCanTrash":
                     consumable.trash = AssetManager.Instance.getPrefab (Prefabs.PopCanTrash).gameObject;
                     break;
@@ -113,14 +115,24 @@ namespace CustomShops
                     consumable.trash = AssetManager.Instance.getPrefab (Prefabs.HotDrinkTrash).gameObject;
                     break;
                 default:
-                    var asset = UnityEngine.Object.Instantiate (assetBundle.LoadAsset ((string)options ["modeltrash"])) as GameObject;
+                    var asset = UnityEngine.Object.Instantiate (assetBundle.LoadAsset ((string)trashItem ["model"])) as GameObject;
                     asset.gameObject.SetActive (false);
                     Trash t = asset.AddComponent<TrashInstance> ();
+                    if (trashItem.ContainsKey("disgustfactor")) {
+                        t.disgustFactor = (float)(double)trashItem ["disgustfactor"];
+                    }
+                    if (trashItem.ContainsKey("canwiggle")) {
+                        t.canWiggle = (bool)trashItem ["canwiggle"];
+                    }
+                    if (trashItem.ContainsKey("volume")) {
+                        t.volume = (float)(double)trashItem ["volume"];
+                    }
                     AssetManager.Instance.registerObject (t);
                     consumable.trash = asset;
-                    break;
 
+                    break;
                 }
+                    
             }
 		}
 	}
