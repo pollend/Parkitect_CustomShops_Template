@@ -72,6 +72,7 @@
     <Compile Include="Shop\Decorator\Product\WearableProductDecorator.cs" />
     <Compile Include="Shop\WearableProductInstance.cs" />
     <Compile Include="Shop\Decorator\ColorDecorator.cs" />
+    <Compile Include="Shop\TrashInstance.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

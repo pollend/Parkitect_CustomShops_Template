@@ -72,6 +72,56 @@ namespace CustomShops
 				consumable.temperaturePreference = ConsumableProduct.TemperaturePreference.NONE;
 			}
 			consumable.portions = (int)(Int64)options ["portions"];
+
+
+            if (options.ContainsKey ("modeltrash")) {
+                switch ((string)options ["modeltrash"]) {
+                case "PopCanTrash":
+                    consumable.trash = AssetManager.Instance.getPrefab (Prefabs.PopCanTrash).gameObject;
+                    break;
+                case "TeaTrash":
+                    consumable.trash = AssetManager.Instance.getPrefab (Prefabs.TeaTrash).gameObject;
+                    break;
+                case "CandyTrash":
+                    consumable.trash = AssetManager.Instance.getPrefab (Prefabs.CandyTrash).gameObject;
+                    break;
+                case "SoftDrinkTrash":
+                    consumable.trash = AssetManager.Instance.getPrefab (Prefabs.SoftDrinkTrash).gameObject;
+                    break;
+                case "SnowconeTrash":
+                    consumable.trash = AssetManager.Instance.getPrefab (Prefabs.SnowconeTrash).gameObject;
+                    break;
+                case "BubbleTeaTrash":
+                    consumable.trash = AssetManager.Instance.getPrefab (Prefabs.BubbleTeaTrash).gameObject;
+                    break;
+                case "ChipBagTrash":
+                    consumable.trash = AssetManager.Instance.getPrefab (Prefabs.ChipBagTrash).gameObject;
+                    break;
+                case "MiniDonutsTrash":
+                    consumable.trash = AssetManager.Instance.getPrefab (Prefabs.MiniDonutsTrash).gameObject;
+                    break;
+                case "ChineseFoodTrash":
+                    consumable.trash = AssetManager.Instance.getPrefab (Prefabs.ChineseFoodTrash).gameObject;
+                    break;
+                case "PopcornTrash":
+                    consumable.trash = AssetManager.Instance.getPrefab (Prefabs.PopcornTrash).gameObject;
+                    break;
+                case "FriesTrash":
+                    consumable.trash = AssetManager.Instance.getPrefab (Prefabs.FriesTrash).gameObject;
+                    break;
+                case "HotDrinkTrash":
+                    consumable.trash = AssetManager.Instance.getPrefab (Prefabs.HotDrinkTrash).gameObject;
+                    break;
+                default:
+                    var asset = UnityEngine.Object.Instantiate (assetBundle.LoadAsset ((string)options ["modeltrash"])) as GameObject;
+                    asset.gameObject.SetActive (false);
+                    Trash t = asset.AddComponent<TrashInstance> ();
+                    AssetManager.Instance.registerObject (t);
+                    consumable.trash = asset;
+                    break;
+
+                }
+            }
 		}
 	}
 }
