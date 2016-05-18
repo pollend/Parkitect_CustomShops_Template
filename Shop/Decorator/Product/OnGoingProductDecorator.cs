@@ -23,8 +23,7 @@ namespace CustomShops
 
 
             if (options.ContainsKey ("hand")) {
-                switch((string)options["hand"])
-                {
+                switch ((string)options ["hand"]) {
                 case "left":
                     product.handSide = Hand.Side.LEFT;
                     break;
@@ -32,6 +31,8 @@ namespace CustomShops
                     product.handSide = Hand.Side.RIGHT;
                     break;
                 }
+            } else {
+                product.handSide = Hand.Side.LEFT;
             }
             product.duration = (int)(Int64)options ["duration"];
             

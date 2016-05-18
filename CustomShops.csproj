@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\Documents\Parkitect_Pre-Alpha_8_Linux_2\Parkitect_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\..\Parkitect_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="UnityEngine">
-      <HintPath>..\..\Documents\Parkitect_Pre-Alpha_8_Linux_2\Parkitect_Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>..\..\Parkitect_Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>..\Parkitect_Pre-Alpha_7a_Linux\Parkitect_Data\Managed\UnityEngine.UI.dll</HintPath>
@@ -60,17 +60,18 @@
     <Compile Include="Main.cs" />
     <Compile Include="CustomShopLoader.cs" />
     <Compile Include="Shop\ShopInstance.cs" />
-    <Compile Include="Shop\WerableProductInstance.cs" />
     <Compile Include="Shop\Decorator\IDecorator.cs" />
     <Compile Include="Shop\Decorator\PriceDecorator.cs" />
     <Compile Include="Shop\Decorator\NameDecorator.cs" />
     <Compile Include="Shop\ConsumableProductInstance.cs" />
     <Compile Include="Shop\Decorator\Product\ProductDecorator.cs" />
-    <Compile Include="Shop\Decorator\Product\WerableProductDecorator.cs" />
     <Compile Include="Shop\Decorator\Product\ConsumableProductDecorator.cs" />
     <Compile Include="Shop\Decorator\ShopSettingsDecorator.cs" />
     <Compile Include="Shop\Decorator\Product\OnGoingProductDecorator.cs" />
     <Compile Include="Shop\OngoingEffectProductInstance.cs" />
+    <Compile Include="Shop\Decorator\Product\WearableProductDecorator.cs" />
+    <Compile Include="Shop\WearableProductInstance.cs" />
+    <Compile Include="Shop\Decorator\ColorDecorator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

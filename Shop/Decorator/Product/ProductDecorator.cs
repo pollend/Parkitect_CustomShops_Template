@@ -16,8 +16,8 @@ namespace CustomShops
 		public void Decorate(GameObject go, Dictionary<string, object> options, AssetBundle assetBundle)
 		{
 			switch ((string)options ["type"]) {
-			case "wearable":
-				new WerableProductDecorator (_name).Decorate (go, options, assetBundle);
+            case "wearable":
+                new WearableProductDecorator (_name).Decorate (go, options, assetBundle);
 				break;
 			case "consumable":
 				new ConsumableProductDecorator (_name).Decorate (go, options, assetBundle);
@@ -85,7 +85,7 @@ namespace CustomShops
 		public GameObject Decorate(Dictionary<string, object> options, AssetBundle assetBundle)
 		{
 			var asset = UnityEngine.Object.Instantiate(assetBundle.LoadAsset((string)options["model"])) as GameObject;
-			(new ColorDecorator()).Decorate(asset.gameObject, options, assetBundle);
+			//(new ColorDecorator()).Decorate(asset.gameObject, options, assetBundle);
 			asset.gameObject.SetActive (false);
 			this.Decorate (asset,options, assetBundle);
 			AssetManager.Instance.registerObject (asset.gameObject.GetComponent<Product> ());

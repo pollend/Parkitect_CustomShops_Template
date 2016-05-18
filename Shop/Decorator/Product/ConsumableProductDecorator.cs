@@ -23,8 +23,7 @@ namespace CustomShops
 			consumable.defaultPrice = (float)(double)options ["price"];
 
             if (options.ContainsKey ("hand")) {
-                switch((string)options["hand"])
-                {
+                switch ((string)options ["hand"]) {
                 case "left":
                     consumable.handSide = Hand.Side.LEFT;
                     break;
@@ -32,6 +31,8 @@ namespace CustomShops
                     consumable.handSide = Hand.Side.RIGHT;
                     break;
                 }
+            } else {
+                consumable.handSide = Hand.Side.LEFT;
             }
 
 
